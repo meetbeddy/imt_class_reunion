@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink as RouterNavLink, Outlet } from "react-router-dom";
 
 function Navigation() {
   return (
@@ -46,7 +46,7 @@ function Navigation() {
             <Nav.Link href="#about">Gallery</Nav.Link>
             <Nav.Link href="#about">Contact</Nav.Link>
             <Nav.Link>
-              <Link to="/login">Login</Link>
+              <RouterNavLink to="/login">Login</RouterNavLink>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
