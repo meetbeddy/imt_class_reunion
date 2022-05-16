@@ -1,4 +1,5 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideNav from "./SideNav";
 
@@ -39,12 +40,14 @@ function Index(props) {
 
             <div className="container-xxl flex-grow-1 container-p-y">
               {props.children}
+              <Outlet/>
             </div>
           </div>
           <div className="content-backdrop fade"></div>
         </div>
       </div>
       <div className="layout-overlay layout-menu-toggle"></div>
+     
     </div>
   );
 }

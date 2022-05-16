@@ -4,7 +4,7 @@ import Auth from "./auth/Index";
 import Dashboard from "./dashboard/Index";
 import MainDashboard from "./user/Dashboard";
 import "./App.css";
-import Profile from "./user/Profile";
+import Profile from "./user/profile/Profile";
 
 function App() {
   return (

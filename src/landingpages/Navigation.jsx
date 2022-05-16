@@ -45,9 +45,10 @@ function Navigation() {
             </NavDropdown>
             <Nav.Link href="#about">Gallery</Nav.Link>
             <Nav.Link href="#about">Contact</Nav.Link>
-            <Nav.Link>
-              <RouterNavLink to="/login">Login</RouterNavLink>
-            </Nav.Link>
+            
+              <RouterNavLink className="nav-link" to="/login">Login</RouterNavLink>
+              <RouterNavLink className="nav-link" to="/register">Register</RouterNavLink>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
