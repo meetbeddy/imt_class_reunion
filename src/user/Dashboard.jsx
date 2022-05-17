@@ -16,10 +16,7 @@ function MainDashboard() {
                   You have done <span className="fw-bold">72%</span> more sales
                   today. Check your new badge in your profile.
                 </p>
-                <a
-                  href="javascript:;"
-                  className="btn btn-sm btn-outline-primary"
-                >
+                <a href="#" className="btn btn-sm btn-outline-primary">
                   View Badges
                 </a>
               </div>

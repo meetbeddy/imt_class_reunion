@@ -14,7 +14,7 @@ function SideNav() {
             <LogoSvg />
           </span>
           <span className="app-brand-text demo menu-text fw-bolder ms-2">
-            Sneat
+            IMT
           </span>
         </RouterNavLink>
         <a

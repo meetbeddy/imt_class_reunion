@@ -9,7 +9,6 @@ function Index(props) {
 
     let layoutMenuEl = document.querySelectorAll("#layout-menu");
     layoutMenuEl.forEach(function (element) {
-      console.log(window);
       const Menu = window?.Menu;
       menu = new Menu(element, {
         orientation: "vertical",
@@ -40,14 +39,13 @@ function Index(props) {
 
             <div className="container-xxl flex-grow-1 container-p-y">
               {props.children}
-              <Outlet/>
+              <Outlet />
             </div>
           </div>
           <div className="content-backdrop fade"></div>
         </div>
       </div>
       <div className="layout-overlay layout-menu-toggle"></div>
-     
     </div>
   );
 }

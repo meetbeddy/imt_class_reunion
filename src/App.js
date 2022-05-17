@@ -4,7 +4,8 @@ import Auth from "./auth/Index";
 import Dashboard from "./dashboard/Index";
 import MainDashboard from "./user/Dashboard";
 import "./App.css";
-import Profile from "./user/profile/Profile";
+import Profile from "./user/profile/Index";
+import UploadCs from "./user/cv/UploadCs";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<MainDashboard />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="cv-upload" element={<Profile />} />
+          <Route path="cv-upload" element={<UploadCs />} />
         </Route>
       </Routes>
     </div>

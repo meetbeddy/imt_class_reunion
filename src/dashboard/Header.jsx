@@ -7,7 +7,7 @@ function Header() {
       id="layout-navbar"
     >
       <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-        <a className="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+        <a className="nav-item nav-link px-0 me-xl-4" href="#">
           <i className="bx bx-menu bx-sm" />
         </a>
       </div>
@@ -46,13 +46,13 @@ function Header() {
           <li className="nav-item navbar-dropdown dropdown-user dropdown">
             <a
               className="nav-link dropdown-toggle hide-arrow"
-              href="javascript:void(0);"
+              href="#;"
               data-bs-toggle="dropdown"
             >
               <div className="avatar avatar-online">
                 <img
                   src="../assets/img/avatars/1.png"
-                  alt
+                  alt=".."
                   className="w-px-40 h-auto rounded-circle"
                 />
               </div>
@@ -65,7 +65,7 @@ function Header() {
                       <div className="avatar avatar-online">
                         <img
                           src="assets/img/avatars/1.png"
-                          alt=""
+                          alt="..."
                           className="w-px-40 h-auto rounded-circle"
                         />
                       </div>
