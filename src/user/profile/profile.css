@@ -1,14 +1,4 @@
-body {
-    color: #797979;
-    background: #f1f2f7;
-    font-family: 'Open Sans', sans-serif;
-    padding: 0px !important;
-    margin: 0px !important;
-    font-size: 13px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-}
+
 
 .profile-nav, .profile-info{
     margin-top:30px;   
@@ -92,7 +82,7 @@ body {
 
 
 .p-text-area, .p-text-area:focus {
-    border: none;
+    width:100%;
     font-weight: 300;
     box-shadow: none;
     color: #c3c3c3;
@@ -374,3 +364,43 @@ ul.summary-list > li:last-child  {
 .activity-desk .album a:last-child{
     margin-right: 0px;
 }
+form{
+    width: 100%;
+}
+
+
+
+.custom-file-input {
+    color: transparent;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f030  add image";
+    color: black;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #696cff;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .custom-file-input:hover::before {
+    border-color: black;
+  }
+  .custom-file-input:active {
+    outline: 0;
+  }
+  .custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+  }
+  
+  
