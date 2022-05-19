@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { Row, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import InputField from "./InputField";
-// import { signIn, signUp } from "../../store/actions/authActions";
+import { signin, signup } from "../store/actions/authActions";
+import { useNavigate } from "react-router-dom";
 // import { clearNotifications } from "../../store/actions/notificationsActions";
 // import { ToastContainer, toast } from "react-toastify";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { Redirect } from "react-router-dom";
 import "./login.css";
 
 function Auth(props) {
   const [authType, setAuthType] = useState();
   const [error, setError] = useState({});
-  const [gender, setGender] = useState("");
-  const [status, setStatus] = useState("");
   const [inputValue, setInputValue] = useState({
     title: "",
     otherName: "",
@@ -28,7 +27,6 @@ function Auth(props) {
     hndRegNum: "",
     residentAddress: "",
     homeAddress: "",
-    dp: "",
     workPlace: "",
     workAddress: "",
     nok1: "",
@@ -45,6 +43,8 @@ function Auth(props) {
 
   // const notification = useSelector((state) => state.notification);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   React.useEffect(() => {
     setAuthType(props.type);
   }, [props.type]);
@@ -61,12 +61,13 @@ function Auth(props) {
   //     return dispatch(clearNotifications());
   //   }
   // }, [dispatch, notification]);
+
   const findErrors = () => {
-    const { firstName, lastName, phone, email, password, confirmPassword } =
+    const { otherName, lastName, phone, email, password, confirmPassword } =
       inputValue;
     const newErrors = {};
-    if (!firstName || firstName === "") {
-      newErrors.firstName = "field cannot be blank!";
+    if (!otherName || otherName === "") {
+      newErrors.otherName = "field cannot be blank!";
     }
     if (!lastName || lastName === "") {
       newErrors.lastName = "field cannot be blank!";
@@ -88,13 +89,13 @@ function Auth(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (authType === "signin") {
-      // dispatch(signIn(inputValue));
+      dispatch(signin(inputValue, navigate));
     } else {
       const newErrors = findErrors();
       if (Object.keys(newErrors).length > 0) {
         setError(newErrors);
       } else {
-        // dispatch(signUp(inputValue));
+        dispatch(signup(inputValue, navigate));
       }
     }
   };
@@ -157,10 +158,10 @@ function Auth(props) {
                       label="Other Names"
                       type="text"
                       name="otherName"
-                      value={inputValue.firstName}
+                      value={inputValue.otherName}
                       onChange={handleChange}
                       placeholder="enter other names"
-                      error={error.firstName}
+                      error={error.otherName}
                       className="col-lg-6"
                       require={true}
                     />
@@ -183,7 +184,12 @@ function Auth(props) {
                     >
                       <Form.Label>Marital Status: </Form.Label>
                       <Form.Check
-                        onChange={(e) => setStatus(e.target.value)}
+                        onChange={(e) =>
+                          setInputValue({
+                            ...inputValue,
+                            maritalStatus: e.target.value,
+                          })
+                        }
                         type="radio"
                         value="married"
                         label="Married"
@@ -192,7 +198,12 @@ function Auth(props) {
                         required
                       ></Form.Check>
                       <Form.Check
-                        onChange={(e) => setStatus(e.target.value)}
+                        onChange={(e) =>
+                          setInputValue({
+                            ...inputValue,
+                            maritalStatus: e.target.value,
+                          })
+                        }
                         type="radio"
                         value="single"
                         label="Single"
@@ -202,7 +213,7 @@ function Auth(props) {
                       ></Form.Check>
                     </Form.Group>
                   </Row>
-                  {status !== "" && (
+                  {inputValue.maritalStatus !== "" && (
                     <Row>
                       <Form.Group
                         controlId="formdradio2"
@@ -210,7 +221,12 @@ function Auth(props) {
                       >
                         <Form.Label>Gender: </Form.Label>
                         <Form.Check
-                          onChange={(e) => setGender(e.target.value)}
+                          onChange={(e) =>
+                            setInputValue({
+                              ...inputValue,
+                              gender: e.target.value,
+                            })
+                          }
                           type="radio"
                           value="male"
                           label="Male"
@@ -219,7 +235,12 @@ function Auth(props) {
                           inline
                         ></Form.Check>
                         <Form.Check
-                          onChange={(e) => setGender(e.target.value)}
+                          onChange={(e) =>
+                            setInputValue({
+                              ...inputValue,
+                              gender: e.target.value,
+                            })
+                          }
                           type="radio"
                           value="female"
                           label="Female"
@@ -229,7 +250,7 @@ function Auth(props) {
                         ></Form.Check>
                       </Form.Group>
 
-                      {gender === "female" && (
+                      {inputValue.gender === "female" && (
                         <InputField
                           label="Husband's Name"
                           type="text"
@@ -270,13 +291,13 @@ function Auth(props) {
                   </Row>
                   <Row>
                     <InputField
-                      label="Residentail Address"
+                      label="Residential Address"
                       type="text"
-                      name="residentialAddress"
-                      value={inputValue.residentialAddress}
+                      name="residentAddress"
+                      value={inputValue.residentAddress}
                       onChange={handleChange}
                       placeholder="enter date of birth"
-                      error={error.residentialAddress}
+                      error={error.residentAddress}
                       className="col-lg-6"
                       require={true}
                     />
