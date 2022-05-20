@@ -14,29 +14,29 @@ function Auth(props) {
   const [authType, setAuthType] = useState();
   const [error, setError] = useState({});
   const [inputValue, setInputValue] = useState({
-    title: "",
-    otherName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    gender: "",
-    maritalStatus: "",
+    title: "Mr",
+    otherName: "Obed 2",
+    lastName: "Test1",
+    phone: "0990",
+    email: "testemail@gmail.com",
+    gender: "male",
+    maritalStatus: "single",
     husband: "",
-    birthDate: "",
-    ndRegNum: "",
-    hndRegNum: "",
-    residentAddress: "",
-    homeAddress: "",
-    workPlace: "",
-    workAddress: "",
-    nok1: "",
-    nokAddress1: "",
-    nokEmail1: "",
-    nokPhone1: "",
-    nok2: "",
-    nokAddress2: "",
-    nokEmail2: "",
-    nokPhone2: "",
+    birthDate: "2002-12-03",
+    ndRegNum: "somevale",
+    hndRegNum: "samle",
+    residentAddress: "kuje",
+    homeAddress: "kuje",
+    workPlace: "CBN",
+    workAddress: "Abuja",
+    nok1: "Daniel",
+    nokAddress1: "kuje",
+    nokEmail1: "danok@gmail.com",
+    nokPhone1: "08023433",
+    nok2: "Dan",
+    nokAddress2: "Kad",
+    nokEmail2: "dan1@gmail.com",
+    nokPhone2: "0927838",
     password: "",
     confirmPassword: "",
   });
@@ -296,7 +296,7 @@ function Auth(props) {
                       name="residentAddress"
                       value={inputValue.residentAddress}
                       onChange={handleChange}
-                      placeholder="enter date of birth"
+                      placeholder="enter resident address"
                       error={error.residentAddress}
                       className="col-lg-6"
                       require={true}
@@ -307,7 +307,7 @@ function Auth(props) {
                       name="homeAddress"
                       value={inputValue.homeAddress}
                       onChange={handleChange}
-                      placeholder=""
+                      placeholder="enter your home address"
                       error={error.homeAddress}
                       className="col-lg-6"
                       require={true}

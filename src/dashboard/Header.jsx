@@ -1,6 +1,37 @@
 import React from "react";
+import { Dropdown, FormControl } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import decode from "jwt-decode";
 
 function Header() {
+  const [user, setUser] = React.useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useNavigate();
+
+  const logout = () => {
+    dispatch({ type: "LOGOUT" });
+
+    history("/login");
+
+    setUser(null);
+  };
+
+  React.useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
   return (
     <nav
       className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
@@ -28,12 +59,13 @@ function Header() {
           </div>
         </div>
         {/* /Search */}
+
         <ul className="navbar-nav flex-row align-items-center ms-auto">
           {/* Place this tag where you want the button to render. */}
-          <li className="nav-item lh-1 me-3">
+          {/* <li className="nav-item lh-1 me-3">
             <a
               className="github-button"
-              href="https://github.com/themeselection/sneat-html-admin-template-free"
+              href="#"
               data-icon="octicon-star"
               data-size="large"
               data-show-count="true"
@@ -41,13 +73,12 @@ function Header() {
             >
               Star
             </a>
-          </li>
-          {/* User */}
-          <li className="nav-item navbar-dropdown dropdown-user dropdown">
-            <a
-              className="nav-link dropdown-toggle hide-arrow"
-              href="#;"
-              data-bs-toggle="dropdown"
+          </li> */}
+          <Dropdown className="nav-item navbar-dropdown dropdown-user dropdown">
+            <Dropdown.Toggle
+              variant="transparent"
+              id="dropdown-basic"
+              className="nav-link dropdown-toggle hide-arrow transparent"
             >
               <div className="avatar avatar-online">
                 <img
@@ -56,65 +87,40 @@ function Header() {
                   className="w-px-40 h-auto rounded-circle"
                 />
               </div>
-            </a>
-            <ul className="dropdown-menu dropdown-menu-end">
-              <li>
-                <a className="dropdown-item" href="#">
-                  <div className="d-flex">
-                    <div className="flex-shrink-0 me-3">
-                      <div className="avatar avatar-online">
-                        <img
-                          src="assets/img/avatars/1.png"
-                          alt="..."
-                          className="w-px-40 h-auto rounded-circle"
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-grow-1">
-                      <span className="fw-semibold d-block">John Doe</span>
-                      <small className="text-muted">Admin</small>
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="dropdown-menu dropdown-menu-end">
+              <Dropdown.Item href="#/action-1">
+                <div className="d-flex">
+                  <div className="flex-shrink-0 me-3">
+                    <div className="avatar avatar-online">
+                      <img
+                        src="../assets/img/avatars/1.png"
+                        alt=".."
+                        className="w-px-40 h-auto rounded-circle"
+                      />
                     </div>
                   </div>
-                </a>
-              </li>
-              <li>
-                <div className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  <i className="bx bx-user me-2" />
-                  <span className="align-middle">My Profile</span>
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  <i className="bx bx-cog me-2" />
-                  <span className="align-middle">Settings</span>
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  <span className="d-flex align-items-center align-middle">
-                    <i className="flex-shrink-0 bx bx-credit-card me-2" />
-                    <span className="flex-grow-1 align-middle">Billing</span>
-                    <span className="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">
-                      4
-                    </span>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <div className="dropdown-divider" />
-              </li>
-              <li>
-                <a className="dropdown-item" href="auth-login-basic.html">
-                  <i className="bx bx-power-off me-2" />
-                  <span className="align-middle">Log Out</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          {/*/ User */}
+                  <div className="flex-grow-1">
+                    <span className="fw-semibold d-block">John Doe</span>
+                    <small className="text-muted">Admin</small>
+                  </div>
+                </div>
+              </Dropdown.Item>
+              <div className="dropdown-divider" />
+              <Dropdown.Item href="#/action-2">
+                {" "}
+                <i className="bx bx-user me-2" />
+                <span className="align-middle">My Profile</span>
+              </Dropdown.Item>
+              <Dropdown.Item href="#" onClick={() => logout()}>
+                {" "}
+                <i class="bx bx-power-off me-2"></i>
+                <span className="align-middle">Logout</span>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          {/* User */}
         </ul>
       </div>
     </nav>

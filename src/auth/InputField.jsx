@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 
 function InputField({
   label,
@@ -11,6 +11,8 @@ function InputField({
   className,
   error,
   require,
+  handleShow,
+  showPass,
 }) {
   return (
     <>
@@ -26,6 +28,7 @@ function InputField({
           isInvalid={!!error}
           required={require}
         />
+
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       </Form.Group>
     </>

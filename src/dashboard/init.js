@@ -1,41 +1,28 @@
-/**
- * Main
- */
-
-"use strict";
-
-let menu, animate;
-
-(function () {
-  // Initialize menu
-  //-----------------
-
+export default function init() {
+  let menu, animate;
   let layoutMenuEl = document.querySelectorAll("#layout-menu");
   layoutMenuEl.forEach(function (element) {
-    menu = new Menu(element, {
+    menu = new window.Menu(element, {
       orientation: "vertical",
       closeChildren: false,
     });
-    // Change parameter to true if you want scroll animation
+
     window.Helpers.scrollToActive((animate = false));
     window.Helpers.mainMenu = menu;
   });
 
-  // Initialize menu togglers and bind click on each
   let menuToggler = document.querySelectorAll(".layout-menu-toggle");
   menuToggler.forEach((item) => {
     item.addEventListener("click", (event) => {
       event.preventDefault();
-      Helpers.toggleCollapsed();
+      window.Helpers.toggleCollapsed();
     });
   });
 
-  // Display menu toggle (layout-menu-toggle) on hover with delay
   let delay = function (elem, callback) {
     let timeout = null;
     elem.onmouseenter = function () {
-      // Set timeout to be a timer which will invoke callback after 300ms (not for small screen)
-      if (!Helpers.isSmallScreen()) {
+      if (!window.Helpers.isSmallScreen()) {
         timeout = setTimeout(callback, 300);
       } else {
         timeout = setTimeout(callback, 0);
@@ -43,15 +30,13 @@ let menu, animate;
     };
 
     elem.onmouseleave = function () {
-      // Clear any timers set to timeout
       document.querySelector(".layout-menu-toggle").classList.remove("d-block");
       clearTimeout(timeout);
     };
   };
   if (document.getElementById("layout-menu")) {
     delay(document.getElementById("layout-menu"), function () {
-      // not for small screen
-      if (!Helpers.isSmallScreen()) {
+      if (!window.Helpers.isSmallScreen()) {
         document.querySelector(".layout-menu-toggle").classList.add("d-block");
       }
     });
@@ -78,7 +63,7 @@ let menu, animate;
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
   );
   tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
+    return new window.bootstrap.Tooltip(tooltipTriggerEl);
   });
 
   // Accordion active class
@@ -124,5 +109,5 @@ let menu, animate;
   // If current layout is vertical and current window screen is > small
 
   // Auto update menu collapsed/expanded based on the themeConfig
-  Helpers.setCollapsed(true, false);
-})();
+  window.Helpers.setCollapsed(true, false);
+}

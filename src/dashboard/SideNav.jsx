@@ -1,8 +1,18 @@
 import React from "react";
 import LogoSvg from "./LogoSvg";
 import { NavLink as RouterNavLink } from "react-router-dom";
+import init from "./init";
 
 function SideNav() {
+  React.useEffect(() => {
+    let menuToggler = document.querySelectorAll(".layout-menu-toggle");
+    menuToggler.forEach((item) => {
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.Helpers.toggleCollapsed();
+      });
+    });
+  }, []);
   return (
     <aside
       id="layout-menu"

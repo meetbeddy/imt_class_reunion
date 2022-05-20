@@ -1,6 +1,7 @@
 import React from "react";
 import EditProfile from "./EditProfile";
 import Profile from "./Profile";
+import Profile2 from "./Profile2";
 
 function Index() {
   const [toggle, setToggle] = React.useState(true);
@@ -11,7 +12,7 @@ function Index() {
   return (
     <>
       {toggle ? (
-        <Profile handleswitch={switchPage} />
+        <Profile2 handleswitch={switchPage} />
       ) : (
         <EditProfile handleswitch={switchPage} />
       )}
