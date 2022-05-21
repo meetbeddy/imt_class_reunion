@@ -33,3 +33,13 @@ export const updateprofile = (formData, router) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateimage = (formData, router) => async (dispatch) => {
+  try {
+    const { data } = await api.imageUpdate(formData);
+
+    dispatch({ type: "AUTH", data });
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -10,8 +10,6 @@ function Profile2(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [img, setImg] = React.useState("");
-  const [status, setStatus] = React.useState(false);
 
   console.log(user.result);
 
@@ -33,7 +31,11 @@ function Profile2(props) {
             <div className="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
               <div className="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
                 <img
-                  src="../assets/img/avatars/1.png"
+                  src={
+                    profile.profileImage
+                      ? profile.profileImage
+                      : "../assets/img/avatars/1.png"
+                  }
                   alt="user"
                   className="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img"
                 />

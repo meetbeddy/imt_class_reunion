@@ -23,3 +23,6 @@ export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
 export const profileUpdate = (formData) =>
   API.patch(`/user/profileupdate`, formData);
+
+export const imageUpdate = (formData) =>
+  API.patch(`/user/profileimageupdate`, formData);

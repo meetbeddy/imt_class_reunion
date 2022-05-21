@@ -2,12 +2,14 @@ import { combineReducers } from "redux";
 
 import posts from "./posts";
 import authReducer from "./auth";
+import notificationReducer from "./notificationReducer";
 
 export const reducers = combineReducers({ posts });
 
 const appReducer = combineReducers({
   posts,
   auth: authReducer,
+  notification: notificationReducer,
 });
 
 const rootReducer = (state, action) => {
