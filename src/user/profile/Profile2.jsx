@@ -1,10 +1,17 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import dayjs from "dayjs";
+import UploadImageModal from "./UploadImageModal";
 
-function Profile2() {
+function Profile2(props) {
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [img, setImg] = React.useState("");
+  const [status, setStatus] = React.useState(false);
 
   console.log(user.result);
 
@@ -22,6 +29,7 @@ function Profile2() {
                 className="rounded-top"
               />
             </div>
+
             <div className="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
               <div className="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
                 <img
@@ -29,24 +37,39 @@ function Profile2() {
                   alt="user"
                   className="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img"
                 />
+                <span className="select-display m-0 border-0">
+                  <button
+                    className="btn btn-outline-primary btn-xs"
+                    onClick={handleShow}
+                  >
+                    Change image
+                  </button>
+                </span>
               </div>
+
               <div className="flex-grow-1 mt-3 mt-sm-5">
                 <div className="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                   <div className="user-profile-info">
                     <h4>{profile.name}</h4>
                     <ul className="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                      <li className="list-inline-item fw-semibold">
+                      {/* <li className="list-inline-item fw-semibold">
                         <i className="bx bx-pen" /> UX Designer
-                      </li>
+                      </li> */}
                       <li className="list-inline-item fw-semibold">
                         <i className="bx bx-map" /> {profile.homeAddress}
                       </li>
                       <li className="list-inline-item fw-semibold">
-                        <i className="bx bx-calendar-alt" /> Joined April 2021
+                        <i className="bx bx-calendar-alt" /> Joined{" "}
+                        {profile.createdAt
+                          ? dayjs(profile.createdAt).format("MMMM-DD-YYYY")
+                          : dayjs(profile.updatedAt).format("MMMM-DD-YYYY")}
                       </li>
                     </ul>
                   </div>
-                  <button className="btn btn-primary text-nowrap">
+                  <button
+                    className="btn btn-primary text-nowrap"
+                    onClick={props.handleswitch}
+                  >
                     <i className="bx bx-user-check" /> Edit Profile
                   </button>
                 </div>
@@ -61,7 +84,7 @@ function Profile2() {
         <div className="col-md-12">
           <ul className="nav nav-pills flex-column flex-sm-row mb-4">
             <li className="nav-item">
-              <a className="nav-link active" href="javascript:void(0);">
+              <a className="nav-link" href="#iuei">
                 <i className="bx bx-user" /> Profile
               </a>
             </li>
@@ -217,7 +240,7 @@ function Profile2() {
 
         <div className="col-xl-8 col-lg-7 col-md-7">
           {/* Activity Timeline */}
-          <div className="card card-action mb-4">
+          {/* <div className="card card-action mb-4">
             <div className="card-header align-items-center">
               <h5 className="card-action-title mb-0">
                 <i className="bx bx-list-ul me-2" />
@@ -345,11 +368,12 @@ function Profile2() {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
           {/*/ Activity Timeline */}
+
           <div className="row">
             {/* Connections */}
-            <div className="col-lg-12 col-xl-6">
+            {/* <div className="col-lg-12 col-xl-6">
               <div className="card card-action mb-4">
                 <div className="card-header align-items-center">
                   <h5 className="card-action-title mb-0">Connections</h5>
@@ -521,10 +545,10 @@ function Profile2() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/*/ Connections */}
             {/* Teams */}
-            <div className="col-lg-12 col-xl-6">
+            {/* <div className="col-lg-12 col-xl-6">
               <div className="card card-action mb-4">
                 <div className="card-header align-items-center">
                   <h5 className="card-action-title mb-0">Teams</h5>
@@ -698,11 +722,11 @@ function Profile2() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/*/ Teams */}
           </div>
           {/* Projects table */}
-          <div className="card mb-4">
+          {/* <div className="card mb-4">
             <div className="card-datatable table-responsive">
               <div
                 id="DataTables_Table_0_wrapper"
@@ -1604,9 +1628,14 @@ function Profile2() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           {/*/ Projects table */}
         </div>
+        <UploadImageModal
+          show={show}
+          handleShow={handleShow}
+          handleClose={handleClose}
+        />
       </div>
       {/*/ User Profile Content */}
     </div>

@@ -47,6 +47,7 @@ function PostForm() {
                       <input
                         type="file"
                         className="custom-file-input border-0 m-0"
+                        id="post"
                         onChange={(e) => handleFileselect(e)}
                       />
                     </li>

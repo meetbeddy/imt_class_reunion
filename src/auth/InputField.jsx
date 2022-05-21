@@ -13,6 +13,7 @@ function InputField({
   require,
   handleShow,
   showPass,
+  read,
 }) {
   return (
     <>
@@ -27,6 +28,7 @@ function InputField({
           onChange={onChange}
           isInvalid={!!error}
           required={require}
+          readOnly={read}
         />
 
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
