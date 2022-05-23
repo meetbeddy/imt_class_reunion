@@ -1,10 +1,17 @@
 import * as api from "../api/index.js";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
   try {
-    const { data } = await api.fetchPosts();
+    dispatch({ type: "START_LOADING" });
+    const {
+      data: { data, currentPage, numberOfPages },
+    } = await api.fetchPosts(page);
 
-    dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch({
+      type: "FETCH_ALL",
+      payload: { data, currentPage, numberOfPages },
+    });
+    dispatch({ type: "END_LOADING" });
   } catch (error) {
     console.log(error.message);
   }
@@ -15,8 +22,12 @@ export const createPost = (post) => async (dispatch) => {
     const { data } = await api.createPost(post);
 
     dispatch({ type: "CREATE", payload: data });
+    dispatch({ type: "GET_SUCCESS_MSG", payload: data });
   } catch (error) {
-    console.log(error.message);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };
 
@@ -26,7 +37,10 @@ export const updatePost = (id, post) => async (dispatch) => {
 
     dispatch({ type: "UPDATE", payload: data });
   } catch (error) {
-    console.log(error.message);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };
 

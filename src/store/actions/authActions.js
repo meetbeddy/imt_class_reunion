@@ -8,7 +8,10 @@ export const signin = (formData, router) => async (dispatch) => {
 
     router("/dashboard");
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };
 
@@ -20,7 +23,10 @@ export const signup = (formData, router) => async (dispatch) => {
 
     router("/dashboard");
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };
 
@@ -28,9 +34,13 @@ export const updateprofile = (formData, router) => async (dispatch) => {
   try {
     const { data } = await api.profileUpdate(formData);
 
+    dispatch({ type: "GET_SUCCESS_MSG", payload: data });
     dispatch({ type: "AUTH", data });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };
 
@@ -40,6 +50,9 @@ export const updateimage = (formData, router) => async (dispatch) => {
 
     dispatch({ type: "AUTH", data });
   } catch (error) {
-    console.log(error);
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
   }
 };

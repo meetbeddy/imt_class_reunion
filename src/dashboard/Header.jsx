@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown, FormControl } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import decode from "jwt-decode";
 
 function Header() {
@@ -20,6 +20,7 @@ function Header() {
     setUser(null);
   };
 
+  const profile = user.result;
   React.useEffect(() => {
     const token = user?.token;
 
@@ -82,7 +83,11 @@ function Header() {
             >
               <div className="avatar avatar-online">
                 <img
-                  src="../assets/img/avatars/1.png"
+                  src={
+                    profile.profileImage
+                      ? profile.profileImage
+                      : "../assets/img/avatars/1.png"
+                  }
                   alt=".."
                   className="w-px-40 h-auto rounded-circle"
                 />
@@ -95,23 +100,29 @@ function Header() {
                   <div className="flex-shrink-0 me-3">
                     <div className="avatar avatar-online">
                       <img
-                        src="../assets/img/avatars/1.png"
+                        src={
+                          profile.profileImage
+                            ? profile.profileImage
+                            : "../assets/img/avatars/1.png"
+                        }
                         alt=".."
                         className="w-px-40 h-auto rounded-circle"
                       />
                     </div>
                   </div>
                   <div className="flex-grow-1">
-                    <span className="fw-semibold d-block">John Doe</span>
-                    <small className="text-muted">Admin</small>
+                    <span className="fw-semibold d-block">{profile.name}</span>
+                    <small className="text-muted">Member</small>
                   </div>
                 </div>
               </Dropdown.Item>
               <div className="dropdown-divider" />
-              <Dropdown.Item href="#/action-2">
-                {" "}
-                <i className="bx bx-user me-2" />
-                <span className="align-middle">My Profile</span>
+              <Dropdown.Item href="#">
+                <Link to={`profile/${profile._id}`}>
+                  {" "}
+                  <i className="bx bx-user me-2" />
+                  <span className="align-middle"> My Profile </span>{" "}
+                </Link>
               </Dropdown.Item>
               <Dropdown.Item href="#" onClick={() => logout()}>
                 {" "}

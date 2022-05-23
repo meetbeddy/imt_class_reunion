@@ -16,7 +16,7 @@ function App() {
         <Route path="/signup" element={<Auth type="register" />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<MainDashboard />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<Profile />} />
           <Route path="cv-upload" element={<UploadCs />} />
         </Route>
       </Routes>

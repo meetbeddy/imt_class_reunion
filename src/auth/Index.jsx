@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 import InputField from "./InputField";
 import { signin, signup } from "../store/actions/authActions";
 import { useNavigate } from "react-router-dom";
-// import { clearNotifications } from "../../store/actions/notificationsActions";
-// import { ToastContainer, toast } from "react-toastify";
+import { clearNotifications } from "../store/actions/notificationsActions";
+import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-// import { Redirect } from "react-router-dom";
 import "./login.css";
 
 function Auth(props) {
@@ -41,7 +40,7 @@ function Auth(props) {
     confirmPassword: "",
   });
 
-  // const notification = useSelector((state) => state.notification);
+  const notification = useSelector((state) => state.notification);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,18 +48,17 @@ function Auth(props) {
     setAuthType(props.type);
   }, [props.type]);
 
-  // const dispatch = useDispatch();
   const handleChange = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
-  // React.useEffect(() => {
-  //   if (notification?.errors?.message) {
-  //     const { message } = notification?.errors;
-  //     toast.error(message);
-  //     return dispatch(clearNotifications());
-  //   }
-  // }, [dispatch, notification]);
+  React.useEffect(() => {
+    if (notification?.errors?.message) {
+      const { message } = notification?.errors;
+      toast.error(message);
+      dispatch(clearNotifications());
+    }
+  }, [dispatch, notification]);
 
   const findErrors = () => {
     const { otherName, lastName, phone, email, password, confirmPassword } =
@@ -537,7 +535,7 @@ function Auth(props) {
           </div>
         </div>
       </div>
-      {/* <ToastContainer position="top-center" /> */}
+      <ToastContainer position="top-center" />
     </div>
   );
 }

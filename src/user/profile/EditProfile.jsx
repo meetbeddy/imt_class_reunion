@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Row, Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import InputField from "../../auth/InputField";
 import { updateprofile } from "../../store/actions/authActions";
+
+import { useDispatch, useSelector } from "react-redux";
 
 function EditProfile(props) {
   const [user, setUser] = React.useState(
@@ -15,25 +15,22 @@ function EditProfile(props) {
   const [error, setError] = useState({});
   const [inputValue, setInputValue] = useState(profile);
 
-  // const notification = useSelector((state) => state.notification);
+  const notification = useSelector((state) => state.notification);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
-  // React.useEffect(() => {
-  //   if (notification?.errors?.message) {
-  //     const { message } = notification?.errors;
-  //     toast.error(message);
-  //     return dispatch(clearNotifications());
-  //   }
-  // }, [dispatch, notification]);
+  React.useEffect(() => {
+    if (notification?.success?.message) {
+      props.handleswitch();
+    }
+  }, [dispatch, notification, props]);
 
   const findErrors = () => {
-    const { phone, email, password, confirmPassword } = inputValue;
+    const { phone, email } = inputValue;
     const newErrors = {};
     // if (!otherName || otherName === "") {
     //   newErrors.otherName = "field cannot be blank!";
@@ -57,7 +54,7 @@ function EditProfile(props) {
     if (Object.keys(newErrors).length > 0) {
       setError(newErrors);
     } else {
-      dispatch(updateprofile(inputValue, navigate));
+      dispatch(updateprofile(inputValue));
     }
   };
 

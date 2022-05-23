@@ -1,6 +1,14 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+let baseURL;
+
+if (process.env.NODE_ENV === "production") {
+  baseURL = "https://sleepy-brushlands-58149.herokuapp.com";
+} else {
+  baseURL = "http://localhost:5000";
+}
+
+const API = axios.create(baseURL);
 
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
@@ -12,8 +20,8 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-export const fetchPosts = () => API.get("/user/posts");
-export const createPost = (newPost) => API.post("/user/posts", newPost);
+export const fetchPosts = () => API.get("/user/getposts");
+export const createPost = (newPost) => API.post("/user/createpost", newPost);
 export const likePost = (id) => API.patch(`/user/posts/${id}/likePost`);
 export const updatePost = (id, updatedPost) =>
   API.patch(`/user/posts/${id}`, updatedPost);

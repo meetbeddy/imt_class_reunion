@@ -4,14 +4,14 @@ import { NavLink as RouterNavLink } from "react-router-dom";
 import init from "./init";
 
 function SideNav() {
+  const [user, setUser] = React.useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
+
+  const profile = user.result;
+
   React.useEffect(() => {
-    let menuToggler = document.querySelectorAll(".layout-menu-toggle");
-    menuToggler.forEach((item) => {
-      item.addEventListener("click", (event) => {
-        event.preventDefault();
-        window.Helpers.toggleCollapsed();
-      });
-    });
+    init();
   }, []);
   return (
     <aside
@@ -44,7 +44,7 @@ function SideNav() {
           </RouterNavLink>
         </li>
         <li className="menu-item ">
-          <RouterNavLink to="profile" className="menu-link">
+          <RouterNavLink to={`profile/${profile._id}`} className="menu-link">
             <i className="menu-icon tf-icons bx bx-user" />
             <div data-i18n="Analytics">Profile</div>
           </RouterNavLink>
