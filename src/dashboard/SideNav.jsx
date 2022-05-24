@@ -24,7 +24,7 @@ function SideNav() {
             <LogoSvg />
           </span>
           <span className="app-brand-text demo menu-text fw-bolder ms-2">
-            IMT
+            IMT `02
           </span>
         </RouterNavLink>
         <a

@@ -13,7 +13,7 @@ export const getPosts = (page) => async (dispatch) => {
     });
     dispatch({ type: "END_LOADING" });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 };
 
