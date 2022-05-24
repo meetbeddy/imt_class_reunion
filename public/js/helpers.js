@@ -560,7 +560,6 @@ const Helpers = {
   // ---
   // Toggle layout
   toggleCollapsed(animate = true) {
-    console.log(this.isCollapsed);
     this.setCollapsed(!this.isCollapsed(), animate);
   },
 

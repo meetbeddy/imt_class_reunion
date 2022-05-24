@@ -11,8 +11,6 @@ function Profile2(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(user.result);
-
   const profile = user.result;
   return (
     <div className="container-xxl flex-grow-1 container-p-y">

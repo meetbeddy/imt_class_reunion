@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function MainDashboard() {
   const { posts, isLoadings } = useSelector((state) => state.posts);
-  console.log(posts);
+
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );
