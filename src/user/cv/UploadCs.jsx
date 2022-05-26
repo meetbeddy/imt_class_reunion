@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import Dropzone from "react-dropzone"; // package to handle file drag-and-drop
-import axios from "axios";
-import download from "downloadjs"; // package to trigger file download
+import download from "downloadjs";
 import logo from "./logo.png";
 import "./upload.css";
+import { useSelector, useDispatch } from "react-redux";
+import { uploadcv, getFile } from "../../store/actions/posts";
+import { clearNotifications } from "../../store/actions/notificationsActions";
+import { ToastContainer, toast } from "react-toastify";
 
 function UploadCs() {
-  // set the base URL as the localhost or the deployed URL
-  const baseURL = process.env.REACT_APP_BASEURL || "http://localhost:5000";
-  let frontURL = "";
-  if (baseURL === "http://localhost:5000") {
-    frontURL = "http://localhost:3000";
-  }
+  const notification = useSelector((state) => state.notification);
+  const cvfile = useSelector((state) => state.posts.file);
 
+  console.log(cvfile);
   const dropRef = useRef(null); // Drag-and-drop component's reference
   const submitBtn = useRef(null); // Submit button's reference
   const finalLinkRef = useRef(null); // Reference to the links displayed after file upload is done successfully
@@ -30,7 +30,30 @@ function UploadCs() {
   const [progress, setProgress] = useState(0); // To set the progress bar's width/percentage
   const [displayProgress, setDisplayProgress] = useState(false); // Bolean variable to display the progress bar during file upload process
   const [displayLinks, setDisplayLinks] = useState(false); // Boolean var to display the links (to download/copy shareable link) after successful file upload
+  const [user, setUser] = React.useState(
+    JSON.parse(localStorage.getItem("profile"))
+  );
 
+  const cv = user?.result?.cv;
+  // console.log(user);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    if (notification?.success?.message) {
+      const { message } = notification?.success;
+      setUploadedFile(true);
+
+      toast.success(message);
+      dispatch(getFile(cv.file_key));
+      dispatch(clearNotifications());
+    }
+    if (notification?.errors?.message) {
+      const { message } = notification?.errors;
+      toast.error(message);
+      dispatch(clearNotifications());
+    }
+  }, [dispatch, notification, cv]);
   useEffect(() => {
     homeRef.current.style.opacity = "1";
   }, []);
@@ -45,7 +68,7 @@ function UploadCs() {
       }, 100);
     }
     // If the progress bar is about to reach 100% but the file upload has returned the uploadedFile object
-    else if (uploadedFile.file && progress >= 99) {
+    else if (uploadedFile && progress >= 99) {
       // setTimeout is used to fadeout the progress bar and to fade-in the final links
       window.setTimeout(() => {
         setDisplayProgress(false); // stop displaying the progress bar
@@ -149,10 +172,10 @@ function UploadCs() {
       shareBtnRef.current.style.color = "";
     }, 200);
 
-    // copy the correct shareable link to the clipboard
-    navigator.clipboard.writeText(
-      `${frontURL || baseURL}/download/${uploadedFile.file._id}`
-    );
+    // // copy the correct shareable link to the clipboard
+    // navigator.clipboard.writeText(
+    //   `${frontURL || baseURL}/download/${uploadedFile.file._id}`
+    // );
 
     // Display the tool tip that says 'link copied'
     const toolTip = document.querySelector("button.share-link .tooltiptext");
@@ -170,72 +193,70 @@ function UploadCs() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // stop displaying the submit button
     submitBtn.current.style.opacity = "0";
 
-    // if the valid filetype has been selected and set as the state var
     if (file) {
-      // create a new FormData and append the file with the key 'file', as this is the key that multer has been configured to look for
       const formdata = new FormData();
       formdata.append("file", file);
 
       // Wait for CSS transition to occur before displaying the progrss bar
       window.setTimeout(() => {
         setDisplayProgress(true);
-      }, 500);
+      }, 200);
+
+      dispatch(uploadcv(formdata));
+      setDisplayLinks(true);
 
       // make POST request to the server API with the headers needed to work with files/form-data
-      axios
-        .post(`${baseURL}/api/file/`, formdata, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((file) => {
-          // Once the POST request occurs succesfully, the returned object includes the File object stored in the DB
-          setErrorMsg(""); // remove any error messages
-          submitBtn.current.style.visibility = "hidden";
+      // axios
+      //   .post(`${baseURL}/api/file/`, formdata, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   })
+      //   .then((file) => {
+      //     // Once the POST request occurs succesfully, the returned object includes the File object stored in the DB
+      //     setErrorMsg(""); // remove any error messages
+      //     submitBtn.current.style.visibility = "hidden";
 
-          // Make GET request to obtain the data for the buffer array of the required file
-          axios
-            .get(`${baseURL}/api/file/${file.data._id}`)
-            .then((uploadedFile) => {
-              setDisplayLinks(true); // once the file data is obtained, display the final links
-              setUploadedFile(uploadedFile.data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          // In case there was an error but no response is sent from the server API, it means there was an internet issue
-          if (!err.response) {
-            setErrorMsg("Please connect to the internet and try again.");
-          }
-          // Check the error response and set the appropriate error message to be displayed to the user
-          else {
-            const offlineError =
-              "Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/";
-            const fileSizeError = "File too large";
-            if (err.response.data === offlineError)
-              setErrorMsg("Please connect to the internet and retry.");
-            else if (err.response.data === fileSizeError)
-              setErrorMsg(
-                "File is too large. Please choose a file of size < 1 MB."
-              );
-            else setErrorMsg(err.response.data);
-          }
-        });
+      //     // Make GET request to obtain the data for the buffer array of the required file
+      //     axios
+      //       .get(`${baseURL}/api/file/${file.data._id}`)
+      //       .then((uploadedFile) => {
+      //         setDisplayLinks(true); // once the file data is obtained, display the final links
+      //         setUploadedFile(uploadedFile.data);
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //       });
+      //   })
+      //   .catch((err) => {
+      //     // In case there was an error but no response is sent from the server API, it means there was an internet issue
+      //     if (!err.response) {
+      //       setErrorMsg("Please connect to the internet and try again.");
+      //     }
+      //     // Check the error response and set the appropriate error message to be displayed to the user
+      //     else {
+      //       const offlineError =
+      //         "Error: MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/";
+      //       const fileSizeError = "File too large";
+      //       if (err.response.data === offlineError)
+      //         setErrorMsg("Please connect to the internet and retry.");
+      //       else if (err.response.data === fileSizeError)
+      //         setErrorMsg(
+      //           "File is too large. Please choose a file of size < 1 MB."
+      //         );
+      //       else setErrorMsg(err.response.data);
+      //     }
+      //   });
     } else {
       setErrorMsg("Please Select a File.");
     }
   };
   return (
     <section ref={homeRef} className="home">
-      {/* display any error message if it's there */}
       <p className="error-msg">{errorMsg}</p>
 
-      {/* the drag-and-drop section */}
       <form className="file-form" onSubmit={handleSubmit}>
         <section className="file-upload">
           <Dropzone
@@ -254,7 +275,6 @@ function UploadCs() {
                   Click Here to Select a File
                 </p>
 
-                {/* display the name of the selected file */}
                 {file.name ? (
                   <div className="file-name">
                     <strong style={{ fontWeight: "700" }}>
@@ -325,8 +345,8 @@ function UploadCs() {
             onClick={() =>
               download(
                 Uint8Array.from(uploadedFile.data.Body.data).buffer, // converting the buffer array to a uint8array, to be compliant with the downloadjs function requirement
-                uploadedFile.file.file_name,
-                uploadedFile.file.file_mimetype
+                cv?.file_name,
+                cv?.file_mimetype
               )
             }
           >
@@ -349,6 +369,7 @@ function UploadCs() {
       ) : (
         ""
       )}
+      <ToastContainer position="top-center" />
     </section>
   );
 }

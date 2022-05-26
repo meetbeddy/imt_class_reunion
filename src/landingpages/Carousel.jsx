@@ -7,8 +7,9 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="http://placekitten.com/g/1300/600"
+          src="../assets/img/imt-admin-block.jpg"
           alt="First slide"
+          height="600"
         />
         <Carousel.Caption>
           <h3>First slide label</h3>
@@ -18,8 +19,9 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="http://placekitten.com/g/1300/600"
+          src="../assets/img/imt-art-garden.jpg"
           alt="Second slide"
+          height="600"
         />
 
         <Carousel.Caption>
@@ -30,8 +32,9 @@ export default function MainCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="http://placekitten.com/g/1300/600"
+          src="../assets/img/imt-office-building.jpg"
           alt="Third slide"
+          height="600"
         />
 
         <Carousel.Caption>

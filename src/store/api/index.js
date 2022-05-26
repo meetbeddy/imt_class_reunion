@@ -33,3 +33,6 @@ export const profileUpdate = (formData) =>
   API.patch(`/user/profileupdate`, formData);
 export const imageUpdate = (formData) =>
   API.patch(`/user/profileimageupdate`, formData);
+export const uploadCv = (formData) => API.post(`/user/uploadcv`, formData);
+export const getCvFile = (id) => API.get(`/user/file/${id}`);
+export const reunionreg = (formData) => API.post(`/user/reunion`, formData);

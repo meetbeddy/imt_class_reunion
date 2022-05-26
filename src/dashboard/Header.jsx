@@ -20,7 +20,7 @@ function Header() {
     setUser(null);
   };
 
-  const profile = user.result;
+  const profile = user?.result;
   React.useEffect(() => {
     const token = user?.token;
 
@@ -29,7 +29,7 @@ function Header() {
 
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
-
+    if (!token) history("/login");
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
@@ -84,8 +84,8 @@ function Header() {
               <div className="avatar avatar-online">
                 <img
                   src={
-                    profile.profileImage
-                      ? profile.profileImage
+                    profile?.profileImage
+                      ? profile?.profileImage
                       : "../assets/img/avatars/1.png"
                   }
                   alt=".."
@@ -101,8 +101,8 @@ function Header() {
                     <div className="avatar avatar-online">
                       <img
                         src={
-                          profile.profileImage
-                            ? profile.profileImage
+                          profile?.profileImage
+                            ? profile?.profileImage
                             : "../assets/img/avatars/1.png"
                         }
                         alt=".."
@@ -111,14 +111,14 @@ function Header() {
                     </div>
                   </div>
                   <div className="flex-grow-1">
-                    <span className="fw-semibold d-block">{profile.name}</span>
+                    <span className="fw-semibold d-block">{profile?.name}</span>
                     <small className="text-muted">Member</small>
                   </div>
                 </div>
               </Dropdown.Item>
               <div className="dropdown-divider" />
               <Dropdown.Item href="#">
-                <Link to={`profile/${profile._id}`}>
+                <Link to={`profile/${profile?._id}`}>
                   {" "}
                   <i className="bx bx-user me-2" />
                   <span className="align-middle"> My Profile </span>{" "}

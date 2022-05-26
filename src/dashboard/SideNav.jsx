@@ -8,7 +8,7 @@ function SideNav() {
     JSON.parse(localStorage.getItem("profile"))
   );
 
-  const profile = user.result;
+  const profile = user?.result;
 
   React.useEffect(() => {
     init();
@@ -44,7 +44,7 @@ function SideNav() {
           </RouterNavLink>
         </li>
         <li className="menu-item ">
-          <RouterNavLink to={`profile/${profile._id}`} className="menu-link">
+          <RouterNavLink to={`profile/${profile?._id}`} className="menu-link">
             <i className="menu-icon tf-icons bx bx-user" />
             <div data-i18n="Analytics">Profile</div>
           </RouterNavLink>
@@ -63,7 +63,7 @@ function SideNav() {
           </a>
           <ul className="menu-sub">
             <li className="menu-item">
-              <RouterNavLink to="cv-upload" className="menu-link">
+              <RouterNavLink to="reunion" className="menu-link">
                 <div data-i18n="Without menu">Reunion</div>
               </RouterNavLink>
             </li>

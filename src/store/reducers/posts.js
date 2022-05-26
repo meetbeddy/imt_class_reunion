@@ -1,4 +1,7 @@
-const post = (state = { isLoading: true, posts: [] }, action) => {
+const post = (
+  state = { isLoading: true, posts: [], file: undefined },
+  action
+) => {
   switch (action.type) {
     case "START_LOADING":
       return { ...state, isLoading: true };
@@ -46,6 +49,11 @@ const post = (state = { isLoading: true, posts: [] }, action) => {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case "GET_USER_CV":
+      return {
+        ...state,
+        file: action.payload,
       };
     default:
       return state;

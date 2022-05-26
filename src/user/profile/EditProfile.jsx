@@ -10,7 +10,7 @@ function EditProfile(props) {
     JSON.parse(localStorage.getItem("profile"))
   );
 
-  const profile = user.result;
+  const profile = user?.result;
 
   const [error, setError] = useState({});
   const [inputValue, setInputValue] = useState(profile);
@@ -83,7 +83,7 @@ function EditProfile(props) {
                 label="Last Name"
                 type="text"
                 name="lastName"
-                value={profile.name.split(" ")[0]}
+                value={profile?.name.split(" ")[0]}
                 onChange={handleChange}
                 placeholder="enter last name"
                 error={error.lastName}

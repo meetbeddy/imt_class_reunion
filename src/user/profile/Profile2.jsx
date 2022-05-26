@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import UploadImageModal from "./UploadImageModal";
+import { getFile } from "../../store/actions/posts";
+import { useDispatch, useSelector } from "react-redux";
+import download from "downloadjs";
 
 function Profile2(props) {
   const [user, setUser] = React.useState(
@@ -11,7 +14,23 @@ function Profile2(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const dispatch = useDispatch();
+  const file = useSelector((state) => state.posts.file);
+  const isLoading = useSelector((state) => state.posts.isLoading);
+
+  console.log(isLoading);
+
   const profile = user.result;
+  React.useEffect(() => {
+    if (isLoading === false && file) {
+      download(
+        Uint8Array.from(file?.data?.Body?.data).buffer, // converting the buffer array to a uint8array, to be compliant with the downloadjs function requirement
+        file.file.file_name,
+        file.file.file_mimetype
+      );
+    }
+  }, [file, isLoading]);
+
   return (
     <div className="container-xxl flex-grow-1 container-p-y">
       {/* Header */}
@@ -72,6 +91,12 @@ function Profile2(props) {
                   >
                     <i className="bx bx-user-check" /> Edit Profile
                   </button>
+                  <button
+                    className="btn btn-primary text-nowrap"
+                    onClick={() => dispatch(getFile(user.result.cv.file_key))}
+                  >
+                    <i className="bx bx-user-check" /> View CV
+                  </button>
                 </div>
               </div>
             </div>
@@ -109,7 +134,7 @@ function Profile2(props) {
       {/*/ Navbar pills */}
       {/* User Profile Content */}
       <div className="row">
-        <div className="col-xl-4 col-lg-5 col-md-5">
+        <div className="col-xl-12 col-lg-5 col-md-5">
           {/* About User */}
           <div className="card mb-4">
             <div className="card-body">

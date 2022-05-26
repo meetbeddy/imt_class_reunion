@@ -16,7 +16,7 @@ function MainDashboard() {
   const [currPage, setCurrPage] = React.useState(1);
 
   const dispatch = useDispatch();
-  const profile = user.result;
+  const profile = user?.result;
 
   React.useEffect(() => {
     dispatch(getPosts(1));
@@ -30,7 +30,7 @@ function MainDashboard() {
   return (
     <div className="row">
       <div className="col-lg-12 mb-4 order-0">
-        {!profile.memberId && <WelcomePost profile={profile} />}
+        {!profile?.memberId && <WelcomePost profile={profile} />}
         <PostForm />
         <h3>Posts and Gallery</h3>
         <MyPagination

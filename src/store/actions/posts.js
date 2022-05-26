@@ -63,3 +63,43 @@ export const deletePost = (id) => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const uploadcv = (formdata) => async (dispatch) => {
+  try {
+    const { data } = await api.uploadCv(formdata);
+    dispatch({ type: "GET_SUCCESS_MSG", payload: data });
+    dispatch({ type: "AUTH", data });
+  } catch (error) {
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
+  }
+};
+
+export const getFile = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.getCvFile(id);
+    dispatch({ type: "START_LOADING" });
+
+    dispatch({ type: "GET_USER_CV", payload: data });
+    dispatch({ type: "END_LOADING" });
+  } catch (error) {
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
+  }
+};
+
+export const reunionReg = (form) => async (dispatch) => {
+  try {
+    const { data } = await api.reunionreg(form);
+    dispatch({ type: "GET_SUCCESS_MSG", payload: data });
+  } catch (error) {
+    dispatch({
+      type: "GET_ERROR_MSG",
+      payload: error?.response?.data,
+    });
+  }
+};

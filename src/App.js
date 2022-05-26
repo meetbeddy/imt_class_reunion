@@ -6,6 +6,7 @@ import MainDashboard from "./user/Dashboard";
 import "./App.css";
 import Profile from "./user/profile/Index";
 import UploadCs from "./user/cv/UploadCs";
+import Reunion from "./user/Events/Reunion";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<MainDashboard />} />
           <Route path="profile/:id" element={<Profile />} />
           <Route path="cv-upload" element={<UploadCs />} />
+          <Route path="reunion" element={<Reunion />} />
         </Route>
       </Routes>
     </div>

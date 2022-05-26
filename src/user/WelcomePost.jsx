@@ -8,7 +8,7 @@ function WelcomePost({ profile }) {
         <div className="col-sm-7">
           <div className="card-body">
             <h5 className="card-title text-primary">
-              Congratulations {profile.name.split(" ")[0]}! 🎉
+              Congratulations {profile?.name.split(" ")[0]}! 🎉
             </h5>
             <p className="mb-4">
               your profile is <span className="fw-bold">98%</span> complete,{" "}
@@ -17,7 +17,7 @@ function WelcomePost({ profile }) {
               you can edit your profile and add a profile picture.
             </p>
             <Link
-              to={`profile/${profile._id}`}
+              to={`profile/${profile?._id}`}
               href="#"
               className="btn btn-sm btn-outline-primary"
             >
