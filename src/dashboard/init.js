@@ -11,11 +11,11 @@ export default function init() {
     window.Helpers.mainMenu = menu;
   });
 
-  // let menuToggler = document.querySelectorAll(".layout-menu-toggle");
-  // menuToggler.forEach((item) => {
-  //   item.addEventListener("click", (event) => {
-  //     event.preventDefault();
-  //     window.Helpers.toggleCollapsed();
-  //   });
-  // });
+   let menuToggler = document.querySelectorAll(".layout-menu-toggle");
+   menuToggler.forEach((item) => {
+    item.addEventListener("click", (event) => {
+       event.preventDefault();
+      window.Helpers.toggleCollapsed();
+    });
+  });
 }
