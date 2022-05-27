@@ -521,6 +521,8 @@ const Helpers = {
   setCollapsed(collapsed = requiredParam("collapsed"), animate = true) {
     const layoutMenu = this.getLayoutMenu();
 
+    // console.log(layoutMenu);
+
     if (!layoutMenu) return;
 
     this._unbindLayoutAnimationEndEvent();

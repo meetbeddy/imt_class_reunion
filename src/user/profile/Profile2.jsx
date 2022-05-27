@@ -6,19 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import download from "downloadjs";
 
 function Profile2(props) {
+  console.log(window.Helpers);
+
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
 
   const dispatch = useDispatch();
   const file = useSelector((state) => state.posts.file);
   const isLoading = useSelector((state) => state.posts.isLoading);
-
-  console.log(isLoading);
 
   const profile = user.result;
   React.useEffect(() => {

@@ -1,18 +1,14 @@
 import React from "react";
 import LogoSvg from "./LogoSvg";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import init from "./init";
 
-function SideNav() {
+function SideNav(props) {
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );
 
   const profile = user?.result;
 
-  React.useEffect(() => {
-    init();
-  }, []);
   return (
     <aside
       id="layout-menu"
@@ -28,8 +24,9 @@ function SideNav() {
           </span>
         </RouterNavLink>
         <a
-          href="#test"
+          href="false"
           className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
+          onClick={props.toggleCollapse}
         >
           <i className="bx bx-chevron-left bx-sm align-middle" />
         </a>

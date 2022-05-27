@@ -12,6 +12,7 @@ function ReunionForm() {
   );
 
   const profile = user?.result;
+
   React.useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("reunion-save"));
     const result = { ...saved };

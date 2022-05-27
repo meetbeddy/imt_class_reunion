@@ -17,13 +17,14 @@ let menu, animate;
       closeChildren: false,
     });
     // Change parameter to true if you want scroll animation
-    window.Helpers.scrollToActive((animate = false));
-    window.Helpers.mainMenu = menu;
+    Helpers.scrollToActive((animate = false));
+    Helpers.mainMenu = menu;
   });
 
   // Initialize menu togglers and bind click on each
   let menuToggler = document.querySelectorAll(".layout-menu-toggle");
   menuToggler.forEach((item) => {
+    // console.log(item);
     item.addEventListener("click", (event) => {
       event.preventDefault();
       Helpers.toggleCollapsed();
@@ -105,13 +106,13 @@ let menu, animate;
   });
 
   // Auto update layout based on screen size
-  window.Helpers.setAutoUpdate(true);
+  Helpers.setAutoUpdate(true);
 
   // Toggle Password Visibility
-  window.Helpers.initPasswordToggle();
+  Helpers.initPasswordToggle();
 
   // Speech To Text
-  window.Helpers.initSpeechToText();
+  Helpers.initSpeechToText();
 
   // Manage menu expanded/collapsed with templateCustomizer & local storage
   //------------------------------------------------------------------

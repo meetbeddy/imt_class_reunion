@@ -28,7 +28,7 @@ function PostCard({ post }) {
     if (likes.length > 0) {
       return likes.find((like) => like === userId) ? (
         <>
-          <i class="bx bxs-like"></i>
+          <i className="bx bxs-like"></i>
           &nbsp;
           {likes.length > 2
             ? `You and ${likes.length - 1} others`
@@ -36,7 +36,7 @@ function PostCard({ post }) {
         </>
       ) : (
         <>
-          <i class="bx bxs-like"></i>
+          <i className="bx bxs-like"></i>
           &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
         </>
       );
@@ -44,7 +44,7 @@ function PostCard({ post }) {
 
     return (
       <>
-        <i class="bx bx-like"></i>
+        <i className="bx bx-like"></i>
         &nbsp;Like
       </>
     );
@@ -70,21 +70,21 @@ function PostCard({ post }) {
           </p>
 
           <div
-            class="btn-toolbar demo-inline-spacing"
+            className="btn-toolbar demo-inline-spacing"
             role="toolbar"
             aria-label="Toolbar with button groups"
           >
-            <div class="btn-group" role="group" aria-label="First group">
+            <div className="btn-group" role="group" aria-label="First group">
               <button
                 type="button"
-                class="btn btn-outline-primary btn-sm"
+                className="btn btn-outline-primary btn-sm"
                 disabled={!user?.result}
                 onClick={handleLike}
               >
                 <Likes />
               </button>
-              <button type="button" class="btn btn-outline-primary btn-sm">
-                <i class="tf-icons bx bx-comment-dots"></i>
+              <button type="button" className="btn btn-outline-primary btn-sm">
+                <i className="tf-icons bx bx-comment-dots"></i>
               </button>
             </div>
           </div>
