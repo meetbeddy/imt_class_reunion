@@ -9,16 +9,23 @@ function Index(props) {
     init();
   }, []);
 
-  const toggleCollapse = (e) => {
+  const toggleCollapse = (e, type) => {
+    e.preventDefault();
     // console.log(window.Helpers);
-    window.Helpers.toggleCollapsed(false);
+
+    if (type === "open") {
+      window.Helpers.toggleCollapsed(true);
+    }
+    if (type === "close") {
+      window.Helpers.toggleCollapsed(false);
+    }
   };
   return (
     <div className="layout-wrapper layout-content-navbar">
       <div className="layout-container">
         <SideNav toggleCollapse={toggleCollapse} />
         <div className="layout-page">
-          <Header />
+          <Header toggleCollapse={toggleCollapse} />
           <div className="content-wrapper">
             {/* <!-- Content --> */}
 
@@ -32,7 +39,7 @@ function Index(props) {
       </div>
       <div
         className="layout-overlay layout-menu-toggle"
-        onClick={toggleCollapse}
+        onClick={(e) => toggleCollapse(e, "close")}
       ></div>
     </div>
   );

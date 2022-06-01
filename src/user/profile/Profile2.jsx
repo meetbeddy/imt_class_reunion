@@ -6,8 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import download from "downloadjs";
 
 function Profile2(props) {
-  console.log(window.Helpers);
-
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );

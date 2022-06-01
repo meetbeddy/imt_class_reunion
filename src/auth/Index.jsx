@@ -13,29 +13,29 @@ function Auth(props) {
   const [authType, setAuthType] = useState();
   const [error, setError] = useState({});
   const [inputValue, setInputValue] = useState({
-    title: "Mr",
-    otherName: "Obed 2",
-    lastName: "Test1",
-    phone: "0990",
-    email: "testemail@gmail.com",
-    gender: "male",
-    maritalStatus: "single",
+    title: "",
+    otherName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    gender: "",
+    maritalStatus: "",
     husband: "",
-    birthDate: "2002-12-03",
-    ndRegNum: "somevale",
-    hndRegNum: "samle",
-    residentAddress: "kuje",
-    homeAddress: "kuje",
-    workPlace: "CBN",
-    workAddress: "Abuja",
-    nok1: "Daniel",
-    nokAddress1: "kuje",
-    nokEmail1: "danok@gmail.com",
-    nokPhone1: "08023433",
-    nok2: "Dan",
-    nokAddress2: "Kad",
-    nokEmail2: "dan1@gmail.com",
-    nokPhone2: "0927838",
+    birthDate: "",
+    ndRegNum: "",
+    hndRegNum: "",
+    residentAddress: "",
+    homeAddress: "",
+    workPlace: "",
+    workAddress: "",
+    nok1: "",
+    nokAddress1: "",
+    nokEmail1: "",
+    nokPhone1: "",
+    nok2: "",
+    nokAddress2: "",
+    nokEmail2: "",
+    nokPhone2: "",
     password: "",
     confirmPassword: "",
   });
@@ -136,6 +136,29 @@ function Auth(props) {
               </h2>
               {authType === "register" && (
                 <>
+                  <Form.Group className="col-md-6" controlId="formTitle">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="title"
+                      value={inputValue?.title}
+                      onChange={handleChange}
+                    >
+                      <option> select your title</option>
+                      <option value="Prof.">Prof </option>
+                      <option value="Dr.">Dr.</option>
+                      <option value="Sir">Sir</option>
+                      <option value="Rev.">Rev</option>
+                      <option value="Chief">Chief</option>
+                      <option value="Alhaji">Alhaji</option>
+                      <option value="Mr.">Mr</option>
+                      <option value="Mrs.">Mrs</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Sir">Sir</option>
+                      <option value="Lady">Lady</option>
+                      <option value="Others">Others</option>
+                    </Form.Control>
+                  </Form.Group>
                   <Row>
                     <InputField
                       label="Last Name"

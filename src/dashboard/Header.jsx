@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import decode from "jwt-decode";
 
-function Header() {
+function Header(props) {
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
   );
@@ -38,8 +38,12 @@ function Header() {
       className="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
       id="layout-navbar"
     >
-      <div className="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-        <a className="nav-item nav-link px-0 me-xl-4" href="#">
+      <div className=" navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+        <a
+          className="nav-item nav-link px-0 me-xl-4"
+          href="#t"
+          onClick={(e) => props.toggleCollapse(e, "open")}
+        >
           <i className="bx bx-menu bx-sm" />
         </a>
       </div>

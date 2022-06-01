@@ -26,7 +26,7 @@ function SideNav(props) {
         <a
           href="false"
           className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
-          onClick={props.toggleCollapse}
+          onClick={(e) => props.toggleCollapse(e, "close")}
         >
           <i className="bx bx-chevron-left bx-sm align-middle" />
         </a>
