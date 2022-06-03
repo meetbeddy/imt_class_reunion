@@ -17,6 +17,19 @@ export const getPosts = (page) => async (dispatch) => {
   }
 };
 
+export const getMyPosts = (page) => async (dispatch) => {
+  try {
+    const {
+      data: { data, currentPage, numberOfPages },
+    } = await api.fetchMyPosts(page);
+
+    dispatch({
+      type: "FETCH_MY_POST",
+      payload: { data, currentPage, numberOfPages },
+    });
+  } catch (error) {}
+};
+
 export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);

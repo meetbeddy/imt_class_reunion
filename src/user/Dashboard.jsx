@@ -6,9 +6,16 @@ import WelcomePost from "./WelcomePost";
 import MyPagination from "../components/MyPagination";
 import { getPosts } from "../store/actions/posts";
 import { useDispatch, useSelector } from "react-redux";
+import { css } from "@emotion/react";
+import { DotLoader } from "react-spinners";
 
+const override = css`
+  display: block;
+  margin: auto auto;
+  border-color: #696cff;
+`;
 function MainDashboard() {
-  const { posts, isLoadings } = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
 
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("profile"))
@@ -33,14 +40,23 @@ function MainDashboard() {
         {!profile?.memberId && <WelcomePost profile={profile} />}
         <PostForm />
         <h3>Posts and Gallery</h3>
-        <MyPagination
-          currentPage={currPage}
-          pageClicked={(ele) => {
-            afterPageClicked(ele);
-          }}
-        >
-          <Posts posts={posts} />
-        </MyPagination>
+        {isLoading ? (
+          <DotLoader
+            color="#696cff"
+            loading={isLoading}
+            css={override}
+            size={150}
+          />
+        ) : (
+          <MyPagination
+            currentPage={currPage}
+            pageClicked={(ele) => {
+              afterPageClicked(ele);
+            }}
+          >
+            <Posts posts={posts} />
+          </MyPagination>
+        )}
       </div>
     </div>
   );

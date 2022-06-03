@@ -1,5 +1,5 @@
 const post = (
-  state = { isLoading: true, posts: [], file: undefined },
+  state = { isLoading: true, posts: [], file: undefined, myPosts: [] },
   action
 ) => {
   switch (action.type) {
@@ -11,6 +11,13 @@ const post = (
       return {
         ...state,
         posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
+      };
+    case "FETCH_MY_POST":
+      return {
+        ...state,
+        myPosts: action.payload.data,
         currentPage: action.payload.currentPage,
         numberOfPages: action.payload.numberOfPages,
       };

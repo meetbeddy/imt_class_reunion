@@ -90,10 +90,12 @@ function Header(props) {
                   src={
                     profile?.profileImage
                       ? profile?.profileImage
-                      : "../assets/img/avatars/1.png"
+                      : profile?.gender === "male"
+                      ? "../assets/img/avatars/male-avatar.jpg"
+                      : "../assets/img/avatars/female-avatar.jpg"
                   }
                   alt=".."
-                  className="w-px-40 h-auto rounded-circle"
+                  className="w-px-40 h-px-40 rounded-circle"
                 />
               </div>
             </Dropdown.Toggle>
@@ -107,10 +109,12 @@ function Header(props) {
                         src={
                           profile?.profileImage
                             ? profile?.profileImage
-                            : "../assets/img/avatars/1.png"
+                            : profile?.gender === "male"
+                            ? "../assets/img/avatars/male-avatar.jpg"
+                            : "../assets/img/avatars/female-avatar.jpg"
                         }
                         alt=".."
-                        className="w-px-40 h-auto rounded-circle"
+                        className="w-px-40 w-px-40 rounded-circle"
                       />
                     </div>
                   </div>

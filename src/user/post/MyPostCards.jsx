@@ -5,39 +5,39 @@ import { likePost, deletePost } from "../../store/actions/posts";
 import { useDispatch } from "react-redux";
 dayjs.extend(relativeTime);
 
-function PostCard({ post }) {
+function MyPostCard({ post }) {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [likes, setLikes] = React.useState(post?.likes);
   const dispatch = useDispatch();
   // const history = useHistory();
 
   const userId = user?.result?._id;
-  const hasLikedPost = post?.likes?.find((like) => like === userId);
+  const hasLikedPost = post.likes.find((like) => like === userId);
 
   const handleLike = async () => {
     dispatch(likePost(post._id));
 
     if (hasLikedPost) {
-      setLikes(post?.likes.filter((id) => id !== userId));
+      setLikes(post.likes.filter((id) => id !== userId));
     } else {
-      setLikes([...post?.likes, userId]);
+      setLikes([...post.likes, userId]);
     }
   };
 
   const Likes = () => {
-    if (likes?.length > 0) {
+    if (likes.length > 0) {
       return likes.find((like) => like === userId) ? (
         <>
           <i className="bx bxs-like"></i>
           &nbsp;
-          {likes?.length > 2
-            ? `You and ${likes?.length - 1} others`
-            : `${likes?.length} like${likes?.length > 1 ? "s" : ""}`}
+          {likes.length > 2
+            ? `You and ${likes.length - 1} others`
+            : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
         </>
       ) : (
         <>
           <i className="bx bxs-like"></i>
-          &nbsp;{likes?.length} {likes?.length === 1 ? "Like" : "Likes"}
+          &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
         </>
       );
     }
@@ -57,9 +57,9 @@ function PostCard({ post }) {
   // };
 
   return (
-    <div className="col-md-4 col-lg-3 col-xl-3">
+    <div className="col-md-6 col-lg-6 col-xl-6">
       <div className="card mb-3">
-        {post?.image && (
+        {post.image && (
           <img className="card-img-top" src={post?.image} alt="Card  cap" />
         )}
         <div className="card-body">
@@ -68,13 +68,7 @@ function PostCard({ post }) {
           <p className="card-text">
             <small className="text-muted">
               posted by{" "}
-              {user?.result?._id === post?.creator ? (
-                "you"
-              ) : (
-                <a href="#" className="text-primary">
-                  {post?.creatorName?.split(" ")[0]}
-                </a>
-              )}{" "}
+              {user?.result?._id === post?.creator ? "you" : post?.name}{" "}
               {dayjs(post?.createdAt).fromNow()}
             </small>
           </p>
@@ -100,7 +94,7 @@ function PostCard({ post }) {
                 <button
                   type="button"
                   className="btn btn-outline-danger btn-sm"
-                  onClick={() => dispatch(deletePost(post?._id))}
+                  onClick={() => dispatch(deletePost(post._id))}
                 >
                   <i className="bx bx-x-circle"></i>
                 </button>
@@ -113,4 +107,4 @@ function PostCard({ post }) {
   );
 }
 
-export default PostCard;
+export default MyPostCard;
