@@ -520,13 +520,13 @@ function Auth(props) {
                 />
               )}
               <div className="row px-3 mb-4">
-                {authType === "login" && (
-                  <a
-                    href="#"
-                    className="ml-auto mb-0  text-white bg-warning w-50"
+                {authType === "signin" && (
+                  <Link
+                    to="/forgotpassword"
+                    className="ml-auto mb-0  text-danger  w-50"
                   >
                     Forgot Password?
-                  </a>
+                  </Link>
                 )}
               </div>
 

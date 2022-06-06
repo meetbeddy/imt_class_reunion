@@ -30,6 +30,11 @@ export const updatePost = (id, updatedPost) =>
 export const deletePost = (id) => API.delete(`/user/deletepost/${id}`);
 export const signIn = (formData) => API.post("/user/signin", formData);
 export const signUp = (formData) => API.post("/user/signup", formData);
+export const forgotpassword = (email) =>
+  API.post("/user/forgotpassword", email);
+export const resetpassword = (formdata) =>
+  API.patch("/user/resetpassword", formdata);
+export const checklink = (token) => API.get(`/user/checklink/${token}`);
 export const profileUpdate = (formData) =>
   API.patch(`/user/profileupdate`, formData);
 export const imageUpdate = (formData) =>
