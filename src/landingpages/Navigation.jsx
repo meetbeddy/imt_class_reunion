@@ -1,13 +1,17 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav, Container } from "react-bootstrap";
-import { NavLink as RouterNavLink, Outlet } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
 
 function Navigation() {
   return (
     <Navbar bg="light" expand="lg" className="navbar fixed-top" id="mainNav">
-      <Container fluid className=" px-4 px-lg-5">
+      <Container fluid className="">
         <Navbar.Brand href="#page-top">
-          <img src="/assets/img/logo.jpg" alt="" />{" "}
+          <img
+            src="/assets/img/logo.jpg"
+            alt=""
+            style={{ maxHeight: "60px", maxWidth: "60px" }}
+          />{" "}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

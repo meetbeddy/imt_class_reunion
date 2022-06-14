@@ -5,9 +5,15 @@ import SideNav from "./SideNav";
 import init from "./init";
 
 function Index(props) {
+  const [check, setCheck] = React.useState(true);
   React.useEffect(() => {
-    init();
-  }, []);
+    if (check) {
+      init();
+      setCheck(false);
+    }
+  }, [check]);
+
+  console.log(check);
 
   const toggleCollapse = (e, type) => {
     e.preventDefault();
@@ -38,7 +44,7 @@ function Index(props) {
         </div>
       </div>
       <div
-        className="layout-overlay layout-menu-toggle"
+        className="layout-overlay"
         onClick={(e) => toggleCollapse(e, "close")}
       ></div>
     </div>

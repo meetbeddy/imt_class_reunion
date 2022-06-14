@@ -3,22 +3,28 @@
     width:100px;
 } */
 .navbar-brand >img{
-    height:100px;
-    width:100px;
+   
 
     object-fit: contain;
     /* filter:blur(10) */
 }
-
+/* nav#mainNav{
+  position: relative;
+ max-width: 1000;
+  overflow: auto;
+}
+.force-overflow {
+  min-width: 992px;
+  } */
  #hero-text , .about-section h1{
     
     font-family: 'Pacifico', cursive;
 }
 a.nav-link{
   font-family: 'Raleway', sans-serif;
-  font-weight: 200;
-  font-size: 1.1em;
-  color: #1E4166 !important;
+  font-weight: 400;
+  font-size: 1.2em;
+  color: #1324e1 !important;
 }
 
 #hero-text{
@@ -64,3 +70,8 @@ a.nav-link{
     background-color: rgb(47, 109, 167);
     outline: 1px solid rgb(102, 152, 202);
   }
+
+  
+footer#landing {
+  background: #212529;
+}

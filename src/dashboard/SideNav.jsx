@@ -25,7 +25,7 @@ function SideNav(props) {
         </RouterNavLink>
         <a
           href="false"
-          className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none"
+          className=" menu-link text-large ms-auto d-block d-xl-none"
           onClick={(e) => props.toggleCollapse(e, "close")}
         >
           <i className="bx bx-chevron-left bx-sm align-middle" />
