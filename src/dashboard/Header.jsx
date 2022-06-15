@@ -42,7 +42,7 @@ function Header(props) {
         <a
           className="nav-item nav-link px-0 me-xl-4"
           href="#t"
-          onClick={(e) => props.toggleCollapse(e, "open")}
+          onClick={(e) => props.toggleCollapse(e)}
         >
           <i className="bx bx-menu bx-sm" />
         </a>

@@ -5,26 +5,13 @@ import SideNav from "./SideNav";
 import init from "./init";
 
 function Index(props) {
-  const [check, setCheck] = React.useState(true);
   React.useEffect(() => {
-    if (check) {
-      init();
-      setCheck(false);
-    }
-  }, [check]);
+    init();
+  }, []);
 
-  console.log(check);
-
-  const toggleCollapse = (e, type) => {
+  const toggleCollapse = (e) => {
     e.preventDefault();
-    // console.log(window.Helpers);
-
-    if (type === "open") {
-      window.Helpers.toggleCollapsed(true);
-    }
-    if (type === "close") {
-      window.Helpers.toggleCollapsed(false);
-    }
+    window.Helpers.toggleCollapsed(true);
   };
   return (
     <div className="layout-wrapper layout-content-navbar">
@@ -43,10 +30,7 @@ function Index(props) {
           <div className="content-backdrop fade"></div>
         </div>
       </div>
-      <div
-        className="layout-overlay"
-        onClick={(e) => toggleCollapse(e, "close")}
-      ></div>
+      <div className="layout-overlay" onClick={(e) => toggleCollapse(e)}></div>
     </div>
   );
 }
