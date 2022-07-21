@@ -277,12 +277,13 @@ function ReunionForm() {
               <Form.Control
                 as="select"
                 name="roomNum"
-                value={inputValue?.roomN}
+                value={inputValue?.roomNum}
                 onChange={handleChange}
               >
                 <option> select number of rooms</option>
                 <option value="1">1 </option>
-                <option value="2">3</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>
@@ -293,6 +294,24 @@ function ReunionForm() {
               </Form.Control>
             </Form.Group>
           )}
+        </Row>
+        <Row>
+          <Form.Group className="col-lg-6 my-3" controlId="formTitle">
+            <Form.Label>Shirt Size</Form.Label>
+            <Form.Control
+              as="select"
+              name="shirtSize"
+              value={inputValue?.shirtSize}
+              onChange={handleChange}
+            >
+              <option> select shirt size</option>
+              <option value="M">M </option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+              <option value="XXXL">XXXL</option>
+            </Form.Control>
+          </Form.Group>
         </Row>
         {inputValue.accomodation === "resident" && (
           <>

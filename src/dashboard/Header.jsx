@@ -26,12 +26,12 @@ function Header(props) {
 
     if (token) {
       const decodedToken = decode(token);
-
+      console.log(decodedToken.exp * 1000 < new Date().getTime());
       if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     if (!token) history("/login");
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
+  }, [history, location, logout, user?.token]);
 
   return (
     <nav
